@@ -41,24 +41,30 @@ namespace Chess
         }
         public void eat(Spot location)
         {
-            if (eatingLocations().Contains(location))
+            List<Spot> eats = eatingLocations();
+            foreach (Spot s in eats)
             {
-                Game1.EVENT_DRAW -= Staticstuff.locations[location.x, location.y].draw;
-                Game1.EVENT_UPDATE -= Staticstuff.locations[location.x, location.y].update;
-                Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
-                Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
-                this.location = location;
+                if (s.x == location.x && s.y == location.y)
+                {
+                    Game1.EVENT_DRAW -= Staticstuff.locations[location.x, location.y].draw;
+                    Game1.EVENT_UPDATE -= Staticstuff.locations[location.x, location.y].update;
+                    Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
+                    Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
+                    this.location = location;
+                }
             }
-
-            
         }
         public void move(Spot location)
         {
-            if (movingLocations().Contains(location))
+            List<Spot> moves = movingLocations();
+            foreach (Spot s in moves)
             {
-                Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
-                Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
-                this.location = location;
+                if (s.x == location.x && s.y == location.y)
+                {
+                    Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
+                    Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
+                    this.location = location;
+                }
             }
         }
         public void update(GameTime gameTime)
