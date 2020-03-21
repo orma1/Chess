@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/blue.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/board.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackBishop.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackKing.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackKnight.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackPawn.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackQueen.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackRook.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteBishop.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteKing.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteKnight.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhitePawn.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteQueen.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteRook.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
