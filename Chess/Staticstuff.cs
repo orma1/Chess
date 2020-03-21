@@ -18,8 +18,10 @@ namespace Chess
         public static ContentManager cm;
         public static SpriteBatch sb;
         public static Piece[,] locations;
+        public static int turn;
         public static void Initialize(ContentManager cm, SpriteBatch sb, GraphicsDevice gd)
         {
+            turn = 0;
             Staticstuff.cm = cm;
             Staticstuff.sb = sb;
             locations = new Piece[8, 8];

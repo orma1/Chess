@@ -48,7 +48,6 @@ namespace Chess
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
             board = Content.Load<Texture2D>("board");
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -70,9 +69,7 @@ namespace Chess
         {
             if (EVENT_UPDATE != null) EVENT_UPDATE(gameTime);
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
-
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 

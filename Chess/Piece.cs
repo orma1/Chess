@@ -51,8 +51,11 @@ namespace Chess
                     Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
                     Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
                     this.location = location;
+                    Staticstuff.turn++;
+                    if (Staticstuff.turn == 2) Staticstuff.turn -= 2;
                 }
             }
+
         }
         public void move(Spot location)
         {
@@ -64,24 +67,31 @@ namespace Chess
                     Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
                     Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
                     this.location = location;
+                    Staticstuff.turn++;
+                    if (Staticstuff.turn == 2) Staticstuff.turn -= 2;
                 }
             }
+
         }
         public void update(GameTime gameTime)
         {
             MouseState ms = Mouse.GetState();
             if (ms.LeftButton == ButtonState.Released && oldms.LeftButton == ButtonState.Pressed)
             {
-                if ((float)ms.X / 50 > location.x && (float)ms.X / 50 < location.x + 1 && (float)ms.Y / 50 > location.y && (float)ms.Y / 50 < location.y + 1)
+                if ((float)ms.X / 50 > location.x && (float)ms.X / 50 < location.x + 1 && (float)ms.Y / 50 > location.y && (float)ms.Y / 50 < location.y + 1) 
                 {
-                    if (!draw_spots)
+                    if((Staticstuff.turn == 0 && pc == PieceColor.White) || (Staticstuff.turn == 1 && pc == PieceColor.Black))
                     {
-                        draw_spots = true;
+                        if (!draw_spots)
+                        {
+                            draw_spots = true;
+                        }
+                        else
+                        {
+                            draw_spots = false;
+                        }
                     }
-                    else
-                    {
-                        draw_spots = false;
-                    }
+
                 }
                 else
                 {
