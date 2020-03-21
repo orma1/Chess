@@ -107,11 +107,13 @@ namespace Chess
                     foreach (Spot s in drawing)
                     {
                         Staticstuff.sb.Draw(Staticstuff.cm.Load<Texture2D>("blue"), new Vector2(s.x * 50, s.y * 50), Color.White);
+                        Staticstuff.locations[s.x, s.y].draw();
                     }
                     drawing = eatingLocations();
                     foreach (Spot s in drawing)
                     {
                         Staticstuff.sb.Draw(Staticstuff.cm.Load<Texture2D>("blue"), new Vector2(s.x * 50, s.y * 50), Color.White);
+                        Staticstuff.locations[s.x, s.y].draw();
                     }
                 }
             }

@@ -38,7 +38,10 @@ namespace Chess
                     else locations[i, k] = new Empty(new Spot(i, k));
                 }
             }
-            locations[2, 2] = new Pawn(new Spot(2, 2), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackPawn"));
+            locations[2, 0] = new Bishop(new Spot(2, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteBishop"));
+            locations[5, 0] = new Bishop(new Spot(5, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteBishop"));
+            locations[2, 7] = new Bishop(new Spot(2, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackBishop"));
+            locations[5, 7] = new Bishop(new Spot(5, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackBishop"));
         }
     }
 }

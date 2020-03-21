@@ -80,6 +80,7 @@ namespace Chess
                         if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None)
                             if (Staticstuff.locations[location.x, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x, location.y + 2));
                     }
+                    if(location.y < 7)
                     if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y + 1));
                 }
                 if (pc == PieceColor.Black)
@@ -89,6 +90,7 @@ namespace Chess
                         if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None)
                             if (Staticstuff.locations[location.x, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x, location.y - 2));
                     }
+                    if(location.y > 0)
                     if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y - 1));
                 }
 

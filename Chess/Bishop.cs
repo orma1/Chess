@@ -26,6 +26,7 @@ namespace Chess
             {
                 currx++;
                 curry++;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -43,6 +44,7 @@ namespace Chess
             {
                 currx--;
                 curry++;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -60,6 +62,7 @@ namespace Chess
             {
                 currx++;
                 curry--;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -77,6 +80,7 @@ namespace Chess
             {
                 currx--;
                 curry--;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -99,6 +103,7 @@ namespace Chess
             {
                 currx++;
                 curry++;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -112,6 +117,7 @@ namespace Chess
             {
                 currx--;
                 curry++;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -125,6 +131,7 @@ namespace Chess
             {
                 currx++;
                 curry--;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -138,6 +145,7 @@ namespace Chess
             {
                 currx--;
                 curry--;
+                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
