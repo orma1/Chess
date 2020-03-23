@@ -71,8 +71,8 @@ namespace Chess
                     if (Staticstuff.turn == 2) Staticstuff.turn -= 2;
                 }
             }
-
         }
+
         public void update(GameTime gameTime)
         {
             MouseState ms = Mouse.GetState();
@@ -106,6 +106,7 @@ namespace Chess
             }
             oldms = ms;
         }
+
         public void draw()
         {
             if (isAlive)
@@ -128,6 +129,7 @@ namespace Chess
                 }
             }
         }
+
         public abstract List<Spot> eatingLocations();
         public abstract List<Spot> movingLocations();
 
