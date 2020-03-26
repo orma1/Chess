@@ -22,11 +22,11 @@ namespace Chess
             List<Spot> list = new List<Spot>();
             int currx = location.x;
             int curry = location.y;
-            while(currx < 8 && currx >= 0 && curry <8 && curry >= 0)
+            while(currx < 8 && curry <8)
             {
                 currx++;
                 curry++;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx >= 8 || curry >= 8) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -40,11 +40,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx >= 0 && curry < 8)
             {
                 currx--;
                 curry++;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx < 0 || curry >= 8) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -58,11 +58,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx < 8 && curry >= 0)
             {
                 currx++;
                 curry--;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx >= 8 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -76,11 +76,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx >= 0 && curry >= 0)
             {
                 currx--;
                 curry--;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx < 0 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
@@ -99,11 +99,11 @@ namespace Chess
             List<Spot> list = new List<Spot>();
             int currx = location.x;
             int curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx < 7 && curry < 7)
             {
                 currx++;
                 curry++;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx > 7 || curry > 7) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -113,11 +113,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx >= 0 && curry < 8)
             {
                 currx--;
                 curry++;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx < 0 || curry > 7) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -127,11 +127,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while (currx < 8 && curry >= 0)
             {
                 currx++;
                 curry--;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx > 7 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
@@ -141,11 +141,11 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while (currx < 8 && currx >= 0 && curry < 8 && curry >= 0)
+            while  (currx >= 0 && curry >= 0)
             {
                 currx--;
                 curry--;
-                if (currx >= 8 || currx < 0 || curry >= 8 || curry < 0) break;
+                if (currx < 0 || curry < 0) break;
                 if (Staticstuff.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));

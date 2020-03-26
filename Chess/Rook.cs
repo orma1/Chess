@@ -52,7 +52,7 @@ namespace Chess
                 }
             }
             curry = location.y;
-            while (currx > 0)
+            while (curry > 0)
             {
                 curry--;
                 if (Staticstuff.locations[currx, curry].pc == pc) break;
