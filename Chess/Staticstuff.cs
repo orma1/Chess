@@ -54,6 +54,8 @@ namespace Chess
             locations[6, 0] = new Knight(new Spot(6, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteKnight"));
             locations[1, 7] = new Knight(new Spot(1, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackKnight"));
             locations[6, 7] = new Knight(new Spot(6, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackKnight"));
+            locations[3, 0] = new Queen(new Spot(3, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteQueen"));
+            locations[3, 7] = new Queen(new Spot(3, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackQueen"));
 
         }
     }

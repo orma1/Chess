@@ -75,6 +75,27 @@ namespace Chess
 
         public void update(GameTime gameTime)
         {
+            if (pt == PieceType.Pawn)
+            {
+                if(pc == PieceColor.White)
+                {
+                    if(location.y == 7)
+                    {
+                        Game1.EVENT_DRAW -= draw;
+                        Game1.EVENT_UPDATE -= update;
+                        Staticstuff.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/White/WhiteQueen"));
+                    }
+                }
+                if (pc == PieceColor.Black)
+                {
+                    if (location.y == 0)
+                    {
+                        Game1.EVENT_DRAW -= draw;
+                        Game1.EVENT_UPDATE -= update;
+                        Staticstuff.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/Black/BlackQueen"));
+                    }
+                }
+            }
             MouseState ms = Mouse.GetState();
             if (ms.LeftButton == ButtonState.Released && oldms.LeftButton == ButtonState.Pressed)
             {

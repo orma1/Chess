@@ -49,6 +49,7 @@
     <Compile Include="Piece.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queen.cs" />
     <Compile Include="Rook.cs" />
     <Compile Include="Spot.cs" />
     <Compile Include="Staticstuff.cs" />
