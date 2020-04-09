@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Or/source/repos/Chess/Chess/Content/Black_Win.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Black_Win.xnb","TextureProcessor","Texture2DContent",2389,60085,0.3182585
 "C:/Users/Or/source/repos/Chess/Chess/Content/blue.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/blue.xnb","TextureProcessor","Texture2DContent",184,10085,0.2847606
 "C:/Users/Or/source/repos/Chess/Chess/Content/board.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/board.xnb","TextureProcessor","Texture2DContent",20967,640085,0.3829754
 "C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackBishop.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Pieces/Black/BlackBishop.xnb","TextureProcessor","Texture2DContent",839,4181,0.1306509
@@ -13,3 +14,4 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhitePawn.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Pieces/White/WhitePawn.xnb","TextureProcessor","Texture2DContent",1199,4885,0.0089992
 "C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteQueen.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Pieces/White/WhiteQueen.xnb","TextureProcessor","Texture2DContent",1690,3325,0.0079786
 "C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteRook.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Pieces/White/WhiteRook.xnb","TextureProcessor","Texture2DContent",814,4045,0.0079675
+"C:/Users/Or/source/repos/Chess/Chess/Content/White_Win.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/White_Win.xnb","TextureProcessor","Texture2DContent",1703,60085,0.0100025

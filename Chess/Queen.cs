@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace Chess
 {
-    class Queen: Piece
+    class Queen : Piece
     {
+        /// <summary>
+        /// The constructor for the Queen class
+        /// </summary>
+        /// <param name="location">The location of the Queen on the board</param>
+        /// <param name="pc">The color of the Queen</param>
+        /// <param name="tex">The texture of the Queen to Draw</param>
         public Queen(Spot location, PieceColor pc, Texture2D tex)
     : base(location, pc, tex)
         {

@@ -9,6 +9,12 @@ namespace Chess
 {
     class Knight : Piece
     {
+        /// <summary>
+        /// The constructor for the Knight class
+        /// </summary>
+        /// <param name="location">The location of the knight, on the board</param>
+        /// <param name="pc">The Color of the Knight</param>
+        /// <param name="tex">The Texture of the Knight to draw on the board</param>
         public Knight(Spot location, PieceColor pc, Texture2D tex)
     : base(location, pc, tex)
         {
@@ -17,13 +23,13 @@ namespace Chess
         public override List<Spot> movingLocations()
         {
             List<Spot> list = new List<Spot>();
-            if(location.y < 6)
+            if (location.y < 6)
             {
-                if(location.x < 7)
+                if (location.x < 7)
                 {
                     if (Staticstuff.locations[location.x + 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x + 1, location.y + 2));
                 }
-                if(location.x > 0)
+                if (location.x > 0)
                 {
                     if (Staticstuff.locations[location.x - 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x - 1, location.y + 2));
                 }
@@ -34,7 +40,7 @@ namespace Chess
                 {
                     if (Staticstuff.locations[location.x + 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x + 2, location.y + 1));
                 }
-                    if(location.x > 1)
+                if (location.x > 1)
                 {
                     if (Staticstuff.locations[location.x - 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x - 2, location.y + 1));
                 }

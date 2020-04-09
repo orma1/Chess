@@ -19,8 +19,19 @@ namespace Chess
         public static SpriteBatch sb;
         public static Piece[,] locations;
         public static int turn;
+        public static PieceColor Player_Won;
+        public static bool is_first_turn;
+        /// <summary>
+        /// The Initialization process for the chess game, sets all the pieces to the right place, 
+        /// and gives drawing capabilities to all classes.
+        /// </summary>
+        /// <param name="cm">Content Manager from Game1, used in order to be able to load content from the drive</param>
+        /// <param name="sb">Sprite Batch from Game1, used in order to draw textures and texts on the board</param>
+        /// <param name="gd">The graphics device from Game1, used in order to be able to use spritebatch</param>
         public static void Initialize(ContentManager cm, SpriteBatch sb, GraphicsDevice gd)
         {
+            is_first_turn = true;
+            Player_Won = PieceColor.None;
             turn = 0;
             Staticstuff.cm = cm;
             Staticstuff.sb = sb;
@@ -56,6 +67,8 @@ namespace Chess
             locations[6, 7] = new Knight(new Spot(6, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackKnight"));
             locations[3, 0] = new Queen(new Spot(3, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteQueen"));
             locations[3, 7] = new Queen(new Spot(3, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackQueen"));
+            locations[4, 0] = new King(new Spot(4, 0), PieceColor.White, cm.Load<Texture2D>("Pieces/White/WhiteKing"));
+            locations[4, 7] = new King(new Spot(4, 7), PieceColor.Black, cm.Load<Texture2D>("Pieces/Black/BlackKing"));
 
         }
     }

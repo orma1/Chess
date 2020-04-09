@@ -9,6 +9,12 @@ namespace Chess
 {
     class Rook : Piece
     {
+        /// <summary>
+        /// The constructor for the Rook Piece
+        /// </summary>
+        /// <param name="location">The location of the Rook on the board</param>
+        /// <param name="pc">The color of the Rook</param>
+        /// <param name="tex">The texture of the rook to draw on the board</param>
         public Rook(Spot location, PieceColor pc, Texture2D tex)
             : base(location, pc, tex)
         {
@@ -69,7 +75,7 @@ namespace Chess
             List<Spot> list = new List<Spot>();
             int currx = location.x;
             int curry = location.y;
-            while(currx < 7)
+            while (currx < 7)
             {
                 currx++;
                 if (Staticstuff.locations[currx, curry].pt != PieceType.None) break;

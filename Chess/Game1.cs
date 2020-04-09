@@ -15,6 +15,8 @@ namespace Chess
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D board;
+        Texture2D white_win;
+        Texture2D black_win;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -48,6 +50,22 @@ namespace Chess
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
             board = Content.Load<Texture2D>("board");
+            black_win = Content.Load<Texture2D>("Black_Win");
+            white_win = Content.Load<Texture2D>("White_Win");
+            Color[] c = new Color[black_win.Width * black_win.Height];
+            black_win.GetData<Color>(c);
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i] == Color.White) c[i] = Color.Transparent;
+            }
+            black_win.SetData<Color>(c);
+            white_win.GetData<Color>(c);
+            for (int i = 0; i < c.Length; i++)
+            {
+                if (c[i] == Color.White) c[i] = Color.Transparent;
+            }
+            white_win.SetData<Color>(c);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -81,7 +99,23 @@ namespace Chess
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(board, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(board, Vector2.Zero, Color.White);// draw the board
+            if (Staticstuff.Player_Won != PieceColor.None)
+            {
+                if (Staticstuff.Player_Won == PieceColor.White)
+                {
+                    spriteBatch.Draw(white_win, new Vector2(50, 200), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(black_win, new Vector2(50, 200), Color.White);
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    Game1.EVENT_DRAW = null;
+                    Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
+                }
+            }
             if (EVENT_DRAW != null) EVENT_DRAW();
             spriteBatch.End();
             // TODO: Add your drawing code here

@@ -11,7 +11,12 @@ namespace Chess
 {
     class Bishop : Piece
     {
-       
+        /// <summary>
+        ///  The constructor for the Bishop chess piece
+        /// </summary>
+        /// <param name="location">The location on the board, of the bishop</param>
+        /// <param name="pc">the color of the bishop</param>
+        /// <param name="tex">the texture of the bishop, to draw on the board</param>
         public Bishop(Spot location, PieceColor pc, Texture2D tex)
             : base(location, pc, tex)
         {
@@ -22,7 +27,7 @@ namespace Chess
             List<Spot> list = new List<Spot>();
             int currx = location.x;
             int curry = location.y;
-            while(currx < 8 && curry <8)
+            while (currx < 8 && curry < 8)
             {
                 currx++;
                 curry++;
@@ -141,7 +146,7 @@ namespace Chess
             }
             currx = location.x;
             curry = location.y;
-            while  (currx >= 0 && curry >= 0)
+            while (currx >= 0 && curry >= 0)
             {
                 currx--;
                 curry--;

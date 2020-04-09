@@ -11,6 +11,12 @@ namespace Chess
 {
     class Pawn : Piece
     {
+        /// <summary>
+        /// The constructor for the Pawn chess piece
+        /// </summary>
+        /// <param name="location">The location on the board of the pawn</param>
+        /// <param name="pc">The color of the pawn</param>
+        /// <param name="tex">The texture of the pawn to draw on the board</param>
         public Pawn(Spot location, PieceColor pc, Texture2D tex)
             : base(location, pc, tex)
         {
@@ -19,9 +25,9 @@ namespace Chess
         public override List<Spot> eatingLocations()
         {
             List<Spot> list = new List<Spot>();
-            if (location.y  < 7)
+            if (location.y < 7)
             {
-                if(pc == PieceColor.White)
+                if (pc == PieceColor.White)
                 {
                     if (location.x > 0 && location.y > 0 && location.x < 7)
                     {
@@ -39,19 +45,19 @@ namespace Chess
                             }
                         }
                     }
-                    
+
                 }
                 if (pc == PieceColor.Black)
                 {
                     if (location.y > 0)
                     {
                         if (location.x < 7)
-                        { 
+                        {
                             if ((Staticstuff.locations[location.x + 1, location.y - 1]).pt != PieceType.None &&
                         ((Staticstuff.locations[location.x + 1, location.y - 1]).pc == PieceColor.White))
-                        {
-                            list.Add(new Spot(location.x + 1, location.y - 1));
-                        }
+                            {
+                                list.Add(new Spot(location.x + 1, location.y - 1));
+                            }
                         }
                         if (location.x > 0 && location.x < 7)
                         {
@@ -73,15 +79,15 @@ namespace Chess
             List<Spot> list = new List<Spot>();
             if (location.y != 7)
             {
-                if(pc == PieceColor.White)
+                if (pc == PieceColor.White)
                 {
                     if (location.y == 1)
                     {
                         if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None)
                             if (Staticstuff.locations[location.x, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x, location.y + 2));
                     }
-                    if(location.y < 7)
-                    if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y + 1));
+                    if (location.y < 7)
+                        if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y + 1));
                 }
                 if (pc == PieceColor.Black)
                 {
@@ -90,8 +96,8 @@ namespace Chess
                         if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None)
                             if (Staticstuff.locations[location.x, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x, location.y - 2));
                     }
-                    if(location.y > 0)
-                    if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y - 1));
+                    if (location.y > 0)
+                        if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x, location.y - 1));
                 }
 
             }

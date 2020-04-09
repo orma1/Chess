@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/Black_Win.png</File>
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/blue.png</File>
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/board.png</File>
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/Black/BlackBishop.png</File>
@@ -18,8 +19,11 @@
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhitePawn.png</File>
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteQueen.png</File>
     <File>C:/Users/Or/source/repos/Chess/Chess/Content/Pieces/White/WhiteRook.png</File>
+    <File>C:/Users/Or/source/repos/Chess/Chess/Content/White_Win.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
