@@ -19,30 +19,31 @@ namespace Chess
     : base(location, pc, tex)
         {
             pt = PieceType.Knight;
+            value = 3;
         }
-        public override List<Spot> movingLocations()
+        public override List<Spot> movingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             if (location.y < 6)
             {
                 if (location.x < 7)
                 {
-                    if (Staticstuff.locations[location.x + 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x + 1, location.y + 2));
+                    if (board.locations[location.x + 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x + 1, location.y + 2));
                 }
                 if (location.x > 0)
                 {
-                    if (Staticstuff.locations[location.x - 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x - 1, location.y + 2));
+                    if (board.locations[location.x - 1, location.y + 2].pt == PieceType.None) list.Add(new Spot(location.x - 1, location.y + 2));
                 }
             }
             if (location.y < 7)
             {
                 if (location.x < 6)
                 {
-                    if (Staticstuff.locations[location.x + 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x + 2, location.y + 1));
+                    if (board.locations[location.x + 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x + 2, location.y + 1));
                 }
                 if (location.x > 1)
                 {
-                    if (Staticstuff.locations[location.x - 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x - 2, location.y + 1));
+                    if (board.locations[location.x - 2, location.y + 1].pt == PieceType.None) list.Add(new Spot(location.x - 2, location.y + 1));
                 }
             }
 
@@ -50,11 +51,11 @@ namespace Chess
             {
                 if (location.x < 6)
                 {
-                    if (Staticstuff.locations[location.x + 2, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x + 2, location.y - 1));
+                    if (board.locations[location.x + 2, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x + 2, location.y - 1));
                 }
                 if (location.x > 1)
                 {
-                    if (Staticstuff.locations[location.x - 2, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x - 2, location.y - 1));
+                    if (board.locations[location.x - 2, location.y - 1].pt == PieceType.None) list.Add(new Spot(location.x - 2, location.y - 1));
                 }
             }
 
@@ -62,38 +63,38 @@ namespace Chess
             {
                 if (location.x < 7)
                 {
-                    if (Staticstuff.locations[location.x + 1, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x + 1, location.y - 2));
+                    if (board.locations[location.x + 1, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x + 1, location.y - 2));
                 }
                 if (location.x > 0)
                 {
-                    if (Staticstuff.locations[location.x - 1, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x - 1, location.y - 2));
+                    if (board.locations[location.x - 1, location.y - 2].pt == PieceType.None) list.Add(new Spot(location.x - 1, location.y - 2));
                 }
             }
             return list;
         }
-        public override List<Spot> eatingLocations()
+        public override List<Spot> eatingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             if (location.y < 6)
             {
                 if (location.x < 7)
                 {
-                    if (Staticstuff.locations[location.x + 1, location.y + 2].pt != PieceType.None && pc != (Staticstuff.locations[location.x + 1, location.y + 2].pc)) list.Add(new Spot(location.x + 1, location.y + 2));
+                    if (board.locations[location.x + 1, location.y + 2].pt != PieceType.None && pc != (board.locations[location.x + 1, location.y + 2].pc)) list.Add(new Spot(location.x + 1, location.y + 2));
                 }
                 if (location.x > 0)
                 {
-                    if (Staticstuff.locations[location.x - 1, location.y + 2].pt != PieceType.None && pc != (Staticstuff.locations[location.x - 1, location.y + 2].pc)) list.Add(new Spot(location.x - 1, location.y + 2));
+                    if (board.locations[location.x - 1, location.y + 2].pt != PieceType.None && pc != (board.locations[location.x - 1, location.y + 2].pc)) list.Add(new Spot(location.x - 1, location.y + 2));
                 }
             }
             if (location.y < 7)
             {
                 if (location.x < 6)
                 {
-                    if (Staticstuff.locations[location.x + 2, location.y + 1].pt != PieceType.None && pc != (Staticstuff.locations[location.x + 2, location.y + 1].pc)) list.Add(new Spot(location.x + 2, location.y + 1));
+                    if (board.locations[location.x + 2, location.y + 1].pt != PieceType.None && pc != (board.locations[location.x + 2, location.y + 1].pc)) list.Add(new Spot(location.x + 2, location.y + 1));
                 }
                 if (location.x > 1)
                 {
-                    if (Staticstuff.locations[location.x - 2, location.y + 1].pt != PieceType.None && pc != (Staticstuff.locations[location.x - 2, location.y + 1].pc)) list.Add(new Spot(location.x - 2, location.y + 1));
+                    if (board.locations[location.x - 2, location.y + 1].pt != PieceType.None && pc != (board.locations[location.x - 2, location.y + 1].pc)) list.Add(new Spot(location.x - 2, location.y + 1));
                 }
             }
 
@@ -101,11 +102,11 @@ namespace Chess
             {
                 if (location.x < 6)
                 {
-                    if (Staticstuff.locations[location.x + 2, location.y - 1].pt != PieceType.None && pc != (Staticstuff.locations[location.x + 2, location.y - 1].pc)) list.Add(new Spot(location.x + 2, location.y - 1));
+                    if (board.locations[location.x + 2, location.y - 1].pt != PieceType.None && pc != (board.locations[location.x + 2, location.y - 1].pc)) list.Add(new Spot(location.x + 2, location.y - 1));
                 }
                 if (location.x > 1)
                 {
-                    if (Staticstuff.locations[location.x - 2, location.y - 1].pt != PieceType.None && pc != (Staticstuff.locations[location.x - 2, location.y - 1].pc)) list.Add(new Spot(location.x - 2, location.y - 1));
+                    if (board.locations[location.x - 2, location.y - 1].pt != PieceType.None && pc != (board.locations[location.x - 2, location.y - 1].pc)) list.Add(new Spot(location.x - 2, location.y - 1));
                 }
             }
 
@@ -113,11 +114,11 @@ namespace Chess
             {
                 if (location.x < 7)
                 {
-                    if (Staticstuff.locations[location.x + 1, location.y - 2].pt != PieceType.None && pc != (Staticstuff.locations[location.x + 1, location.y - 2].pc)) list.Add(new Spot(location.x + 1, location.y - 2));
+                    if (board.locations[location.x + 1, location.y - 2].pt != PieceType.None && pc != (board.locations[location.x + 1, location.y - 2].pc)) list.Add(new Spot(location.x + 1, location.y - 2));
                 }
                 if (location.x > 0)
                 {
-                    if (Staticstuff.locations[location.x - 1, location.y - 2].pt != PieceType.None && pc != (Staticstuff.locations[location.x - 1, location.y - 2].pc)) list.Add(new Spot(location.x - 1, location.y - 2));
+                    if (board.locations[location.x - 1, location.y - 2].pt != PieceType.None && pc != (board.locations[location.x - 1, location.y - 2].pc)) list.Add(new Spot(location.x - 1, location.y - 2));
                 }
             }
             return list;

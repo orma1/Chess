@@ -16,15 +16,14 @@ namespace Chess
             : base(location)
         {
             pt = PieceType.None;
-            pc = PieceColor.None;
             isAlive = false;
         }
-        public override List<Spot> eatingLocations()
+        public override List<Spot> eatingLocations(Board board)
         {
             //it is an empty piece, meaning it can't eat anyone, so I return an empty list
             return (new List<Spot>());
         }
-        public override List<Spot> movingLocations()
+        public override List<Spot> movingLocations(Board board)
         {
             //it is an empty piece, meaning it can't move anywhere, so I return an empty list
             return (new List<Spot>());

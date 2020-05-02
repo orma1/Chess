@@ -19,14 +19,15 @@ namespace Chess
         public King(Spot location, PieceColor pc, Texture2D tex)
             : base(location, pc, tex)
         {
+            value = 200;
             pt = PieceType.King;
         }
-        public override List<Spot> eatingLocations()
+        public override List<Spot> eatingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             if (location.x > 0 && location.y < 7)
             {
-                if (Staticstuff.locations[location.x - 1, location.y + 1].pt != PieceType.None && Staticstuff.locations[location.x - 1, location.y + 1].pc != pc)
+                if (board.locations[location.x - 1, location.y + 1].pt != PieceType.None && board.locations[location.x - 1, location.y + 1].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y + 1)))*/
                     list.Add(new Spot(location.x - 1, location.y + 1));
@@ -34,7 +35,7 @@ namespace Chess
             }
             if (location.y < 7)
             {
-                if (Staticstuff.locations[location.x, location.y + 1].pt != PieceType.None && Staticstuff.locations[location.x, location.y + 1].pc != pc)
+                if (board.locations[location.x, location.y + 1].pt != PieceType.None && board.locations[location.x, location.y + 1].pc != pc)
                 {
                     /* if (!if_move_check(new Spot(location.x, location.y + 1)))*/
                     list.Add(new Spot(location.x, location.y + 1));
@@ -42,7 +43,7 @@ namespace Chess
             }
             if (location.x < 7 && location.y < 7)
             {
-                if (Staticstuff.locations[location.x + 1, location.y + 1].pt != PieceType.None && Staticstuff.locations[location.x + 1, location.y + 1].pc != pc)
+                if (board.locations[location.x + 1, location.y + 1].pt != PieceType.None && board.locations[location.x + 1, location.y + 1].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y + 1)))*/
                     list.Add(new Spot(location.x + 1, location.y + 1));
@@ -50,7 +51,7 @@ namespace Chess
             }
             if (location.x > 0)
             {
-                if (Staticstuff.locations[location.x - 1, location.y].pt != PieceType.None && Staticstuff.locations[location.x - 1, location.y].pc != pc)
+                if (board.locations[location.x - 1, location.y].pt != PieceType.None && board.locations[location.x - 1, location.y].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y)))*/
                     list.Add(new Spot(location.x - 1, location.y));
@@ -58,7 +59,7 @@ namespace Chess
             }
             if (location.x < 7)
             {
-                if (Staticstuff.locations[location.x + 1, location.y].pt != PieceType.None && Staticstuff.locations[location.x + 1, location.y].pc != pc)
+                if (board.locations[location.x + 1, location.y].pt != PieceType.None && board.locations[location.x + 1, location.y].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y)))*/
                     list.Add(new Spot(location.x + 1, location.y));
@@ -66,7 +67,7 @@ namespace Chess
             }
             if (location.x > 0 && location.y > 0)
             {
-                if (Staticstuff.locations[location.x - 1, location.y - 1].pt != PieceType.None && Staticstuff.locations[location.x - 1, location.y - 1].pc != pc)
+                if (board.locations[location.x - 1, location.y - 1].pt != PieceType.None && board.locations[location.x - 1, location.y - 1].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y - 1)))*/
                     list.Add(new Spot(location.x - 1, location.y - 1));
@@ -74,7 +75,7 @@ namespace Chess
             }
             if (location.y > 0)
             {
-                if (Staticstuff.locations[location.x, location.y - 1].pt != PieceType.None && Staticstuff.locations[location.x, location.y - 1].pc != pc)
+                if (board.locations[location.x, location.y - 1].pt != PieceType.None && board.locations[location.x, location.y - 1].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x, location.y - 1)))*/
                     list.Add(new Spot(location.x, location.y - 1));
@@ -82,7 +83,7 @@ namespace Chess
             }
             if (location.x < 7 && location.y > 0)
             {
-                if (Staticstuff.locations[location.x + 1, location.y - 1].pt != PieceType.None && Staticstuff.locations[location.x + 1, location.y - 1].pc != pc)
+                if (board.locations[location.x + 1, location.y - 1].pt != PieceType.None && board.locations[location.x + 1, location.y - 1].pc != pc)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y - 1)))*/
                     list.Add(new Spot(location.x + 1, location.y - 1));
@@ -90,12 +91,12 @@ namespace Chess
             }
             return list;
         }
-        public override List<Spot> movingLocations()
+        public override List<Spot> movingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             if (location.x > 0 && location.y < 7)
             {
-                if (Staticstuff.locations[location.x - 1, location.y + 1].pt == PieceType.None)
+                if (board.locations[location.x - 1, location.y + 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y + 1)))*/
                     list.Add(new Spot(location.x - 1, location.y + 1));
@@ -103,7 +104,7 @@ namespace Chess
             }
             if (location.y < 7)
             {
-                if (Staticstuff.locations[location.x, location.y + 1].pt == PieceType.None)
+                if (board.locations[location.x, location.y + 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x, location.y + 1)))*/
                     list.Add(new Spot(location.x, location.y + 1));
@@ -111,7 +112,7 @@ namespace Chess
             }
             if (location.x < 7 && location.y < 7)
             {
-                if (Staticstuff.locations[location.x + 1, location.y + 1].pt == PieceType.None)
+                if (board.locations[location.x + 1, location.y + 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y + 1)))*/
                     list.Add(new Spot(location.x + 1, location.y + 1));
@@ -119,7 +120,7 @@ namespace Chess
             }
             if (location.x > 0)
             {
-                if (Staticstuff.locations[location.x - 1, location.y].pt == PieceType.None)
+                if (board.locations[location.x - 1, location.y].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y)))*/
                     list.Add(new Spot(location.x - 1, location.y));
@@ -127,7 +128,7 @@ namespace Chess
             }
             if (location.x < 7)
             {
-                if (Staticstuff.locations[location.x + 1, location.y].pt == PieceType.None)
+                if (board.locations[location.x + 1, location.y].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y)))*/
                     list.Add(new Spot(location.x + 1, location.y));
@@ -135,7 +136,7 @@ namespace Chess
             }
             if (location.x > 0 && location.y > 0)
             {
-                if (Staticstuff.locations[location.x - 1, location.y - 1].pt == PieceType.None)
+                if (board.locations[location.x - 1, location.y - 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x - 1, location.y - 1)))*/
                     list.Add(new Spot(location.x - 1, location.y - 1));
@@ -143,7 +144,7 @@ namespace Chess
             }
             if (location.y > 0)
             {
-                if (Staticstuff.locations[location.x, location.y - 1].pt == PieceType.None)
+                if (board.locations[location.x, location.y - 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x, location.y - 1)))*/
                     list.Add(new Spot(location.x, location.y - 1));
@@ -151,7 +152,7 @@ namespace Chess
             }
             if (location.x < 7 && location.y > 0)
             {
-                if (Staticstuff.locations[location.x + 1, location.y - 1].pt == PieceType.None)
+                if (board.locations[location.x + 1, location.y - 1].pt == PieceType.None)
                 {
                     /*if (!if_move_check(new Spot(location.x + 1, location.y - 1)))*/
                     list.Add(new Spot(location.x + 1, location.y - 1));
@@ -159,19 +160,19 @@ namespace Chess
             }
             return list;
         }
-        public bool if_move_check(Spot location)
+        public bool if_move_check(Spot location, Board board)
         {
             for (int i = 0; i < 8; i++)
             {
                 for (int k = 0; k < 8; k++)
                 {
-                    if (Staticstuff.locations[i, k].pt != PieceType.None)
+                    if (board.locations[i, k].pt != PieceType.None)
                     {
-                        if (Staticstuff.locations[i, k].pc != pc)
+                        if (board.locations[i, k].pc != pc)
                         {
-                            if (Staticstuff.locations[i, k].pt == PieceType.Pawn)
+                            if (board.locations[i, k].pt == PieceType.Pawn)
                             {
-                                if (Staticstuff.locations[i, k].pc == PieceColor.White && pc == PieceColor.Black)
+                                if (board.locations[i, k].pc == PieceColor.White && pc == PieceColor.Black)
                                 {
                                     if (i < 7 && k < 7)
                                     {
@@ -182,7 +183,7 @@ namespace Chess
                                         if (i - 1 == location.x && k + 1 == location.y) return true;
                                     }
                                 }
-                                else if (Staticstuff.locations[i, k].pc == PieceColor.Black && pc == PieceColor.White)
+                                else if (board.locations[i, k].pc == PieceColor.Black && pc == PieceColor.White)
                                 {
                                     if (i > 0 && k > 0)
                                     {

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 
 namespace Chess
 {
@@ -10,13 +11,20 @@ namespace Chess
     /// </summary>
     public class Game1 : Game
     {
+        /*enum OnlineState
+        {
+            AskingRole, //host or join
+            Connecting,
+            Playing
+        }
+        OnlineGame game;
+        OnlineState state = OnlineState.AskingRole;*/
         public static DlgtUpdate EVENT_UPDATE;
         public static DlgtDraw EVENT_DRAW;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont Arial;
         Texture2D board;
-        Texture2D white_win;
-        Texture2D black_win;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -50,23 +58,7 @@ namespace Chess
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
             board = Content.Load<Texture2D>("board");
-            black_win = Content.Load<Texture2D>("Black_Win");
-            white_win = Content.Load<Texture2D>("White_Win");
-            Color[] c = new Color[black_win.Width * black_win.Height];
-            black_win.GetData<Color>(c);
-            for (int i = 0; i < c.Length; i++)
-            {
-                if (c[i] == Color.White) c[i] = Color.Transparent;
-            }
-            black_win.SetData<Color>(c);
-            white_win.GetData<Color>(c);
-            for (int i = 0; i < c.Length; i++)
-            {
-                if (c[i] == Color.White) c[i] = Color.Transparent;
-            }
-            white_win.SetData<Color>(c);
-
-            // TODO: use this.Content to load your game content here
+            Arial = Content.Load<SpriteFont>("Arial");
         }
 
         /// <summary>
@@ -85,12 +77,74 @@ namespace Chess
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            /*switch (state)
+            {
+                case OnlineState.AskingRole:
+                    if (Keyboard.GetState().IsKeyDown(Keys.H))
+                    {
+                        game = new HostGame(int.Parse("123"));
+                        game.OnConnection += new OnConnectionHandler(onlineGame_OnConnection);
+                        game.Init();
+
+                        state = OnlineState.Connecting;
+                    }
+                    else if (Keyboard.GetState().IsKeyDown(Keys.J))
+                    {
+                        game = new JoinGame("127.0.0.1", int.Parse("123"));
+                        game.OnConnection += new OnConnectionHandler(onlineGame_OnConnection);
+                        game.Init();
+
+                        state = OnlineState.Connecting;
+                    }
+                    break;
+
+                case OnlineState.Connecting:
+
+                    break;
+
+                case OnlineState.Playing:
+                    if (Staticstuff.board.white_turn)
+                    {
+                        game.host.update(gameTime);
+                    }
+                    else
+                    {
+                        game.join.update(gameTime);
+                    }
+                    
+                    break;
+            }
+
+            this.Window.Title = state.ToString();
+            if (this.Window.Title == "Playing") this.Window.Title = "Chess";*/
             if (EVENT_UPDATE != null) EVENT_UPDATE(gameTime);
+            Staticstuff.tie = true;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int k = 0; k < 8; k++)
+                {
+                    if((Staticstuff.board.locations[i, k].pc == PieceColor.White && Staticstuff.board.white_turn) 
+                        || (Staticstuff.board.locations[i, k].pc == PieceColor.Black && !Staticstuff.board.white_turn))
+                    {
+                        if(Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board).Count > 0 
+                            || Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board).Count > 0)
+                        {
+                            Staticstuff.tie = false;
+                            break;
+                        }
+                    }
+                }
+                if (!Staticstuff.tie) break;
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
 
+       /* void onlineGame_OnConnection()
+        {
+            state = OnlineState.Playing;
+        }*/
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -100,15 +154,31 @@ namespace Chess
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(board, Vector2.Zero, Color.White);// draw the board
+            /*if (state == OnlineState.Playing)
+            {
+                if (Staticstuff.board.white_turn)
+                {
+                    game.host.draw();
+                    game.join.draw();
+                }
+                else
+                {
+                    game.join.draw();
+                    game.host.draw();
+                }
+                
+                
+            }*/
+            if (EVENT_DRAW != null) EVENT_DRAW();
             if (Staticstuff.Player_Won != PieceColor.None)
             {
                 if (Staticstuff.Player_Won == PieceColor.White)
                 {
-                    spriteBatch.Draw(white_win, new Vector2(50, 200), Color.White);
+                    spriteBatch.DrawString(Arial, "      White player wins!\nPress space to play again", new Vector2(50, 200), Color.Black);
                 }
                 else
                 {
-                    spriteBatch.Draw(black_win, new Vector2(50, 200), Color.White);
+                    spriteBatch.DrawString(Arial, "      Black player wins!\nPress space to play again", new Vector2(50, 200), Color.Black);
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
@@ -116,8 +186,18 @@ namespace Chess
                     Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
                 }
             }
-            if (EVENT_DRAW != null) EVENT_DRAW();
+            if (Staticstuff.tie)
+            {
+                Game1.EVENT_UPDATE = null;
+                spriteBatch.DrawString(Arial, "                 Tie\nPress space to play again", new Vector2(50, 200), Color.Black);
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    Game1.EVENT_DRAW = null;
+                    Staticstuff.Initialize(Content, spriteBatch, GraphicsDevice);
+                }
+            }
             spriteBatch.End();
+
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

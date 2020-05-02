@@ -15,10 +15,11 @@ namespace Chess
     {
         public PieceType pt;
         protected Texture2D tex;
-        protected bool isAlive, draw_spots;
-        protected Spot location;
+        public bool isAlive, draw_spots;
+        public Spot location;
         MouseState oldms;
         public PieceColor pc;
+        public int value;
         /// <summary>
         /// The constructor for a chess piece, also make any red pixel into transparent
         /// </summary>
@@ -27,6 +28,7 @@ namespace Chess
         /// <param name="tex">The texture of the piece</param>
         public Piece(Spot location, PieceColor pc = PieceColor.None, Texture2D tex = null)
         {
+            value = 0;
             draw_spots = false;
             isAlive = true;
             if (tex != null)
@@ -52,22 +54,20 @@ namespace Chess
         /// If possible, moves the piece to the given location, and removes the piece that was there before
         /// </summary>
         /// <param name="location">the location to move the piece to</param>
-        public void eat(Spot location)
+        public void eat(Spot location, Board board)
         {
-            List<Spot> eats = eatingLocations();//a list with all the possible loactions to eat in
+            List<Spot> eats = eatingLocations(board);//a list with all the possible loactions to eat in
             foreach (Spot s in eats)//Goes through all the locations in the list
             {
                 if (s.x == location.x && s.y == location.y)//if the location given is in the list, move the piece and remove the piece that was there before
                 {
-                    PieceType eaten = Staticstuff.locations[s.x, s.y].pt;
-                    Game1.EVENT_DRAW -= Staticstuff.locations[location.x, location.y].draw;
-                    Game1.EVENT_UPDATE -= Staticstuff.locations[location.x, location.y].update;
-                    Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];
-                    Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
+                    PieceType eaten = board.locations[s.x, s.y].pt;
+                    Game1.EVENT_DRAW -= board.locations[location.x, location.y].draw;
+                    Game1.EVENT_UPDATE -= board.locations[location.x, location.y].update;
+                    board.locations[location.x, location.y] = board.locations[this.location.x, this.location.y];
+                    board.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));
                     this.location = location;
-                    if (Staticstuff.is_first_turn) Staticstuff.is_first_turn = false;
-                    Staticstuff.turn++;//move the turn to the other player
-                    if (Staticstuff.turn == 2) Staticstuff.turn -= 2;
+                    board.white_turn = !board.white_turn;
                     if (eaten == PieceType.King)//if the piece eaten is a king, you need to stop updating any of the pieces
                     {
                         Game1.EVENT_UPDATE = null;
@@ -82,19 +82,17 @@ namespace Chess
         /// If possible, moves the piece to the given location
         /// </summary>
         /// <param name="location">the location to move the piece to</param>
-        public void move(Spot location)
+        public void move(Spot location, Board board)
         {
-            List<Spot> moves = movingLocations();//a list with all the possible loactions to move to
+            List<Spot> moves = movingLocations(board);//a list with all the possible loactions to move to
             foreach (Spot s in moves)//Goes through all the locations
             {
                 if (s.x == location.x && s.y == location.y)//if the location given is in the list, move the piece
                 {
-                    Staticstuff.locations[location.x, location.y] = Staticstuff.locations[this.location.x, this.location.y];// move the piece to the new location
-                    Staticstuff.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));// create an empty piece in the previous location
+                    board.locations[location.x, location.y] = board.locations[this.location.x, this.location.y];// move the piece to the new location
+                    board.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));// create an empty piece in the previous location
                     this.location = location;
-                    Staticstuff.turn++;//move the turn to the other player
-                    if (Staticstuff.is_first_turn) Staticstuff.is_first_turn = false;
-                    if (Staticstuff.turn == 2) Staticstuff.turn -= 2;
+                    board.white_turn = !board.white_turn;
                 }
             }
         }
@@ -113,7 +111,7 @@ namespace Chess
                         Game1.EVENT_DRAW -= draw;
                         Game1.EVENT_UPDATE -= update;
                         //afterwards I create a queen in the same place with the same color, finising the process
-                        Staticstuff.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/White/WhiteQueen"));
+                        Staticstuff.board.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/White/WhiteQueen"));
                     }
                 }
                 if (pc == PieceColor.Black)//if the piece is in the last row, then there is a promotion
@@ -124,7 +122,7 @@ namespace Chess
                         Game1.EVENT_DRAW -= draw;
                         Game1.EVENT_UPDATE -= update;
                         //afterwards I create a queen in the same place with the same color, finising the process
-                        Staticstuff.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/Black/BlackQueen"));
+                        Staticstuff.board.locations[location.x, location.y] = new Queen(new Spot(location.x, location.y), pc, Staticstuff.cm.Load<Texture2D>("Pieces/Black/BlackQueen"));
                     }
                 }
             }
@@ -133,7 +131,7 @@ namespace Chess
             {
                 if ((float)ms.X / 50 > location.x && (float)ms.X / 50 < location.x + 1 && (float)ms.Y / 50 > location.y && (float)ms.Y / 50 < location.y + 1)
                 {
-                    if ((Staticstuff.turn == 0 && pc == PieceColor.White) || (Staticstuff.turn == 1 && pc == PieceColor.Black))
+                    if (Staticstuff.board.white_turn && pc == PieceColor.White || !Staticstuff.board.white_turn && pc == PieceColor.Black)
                     {
                         if (!draw_spots)
                         {
@@ -152,13 +150,30 @@ namespace Chess
                     if (draw_spots)
                     {
                         Spot sp = new Spot(ms.X / 50, ms.Y / 50);
-                        move(sp);
-                        eat(sp);
+                        move(sp, Staticstuff.board);
+                        eat(sp, Staticstuff.board);
                         draw_spots = false;
                     }
                 }
             }
             oldms = ms;
+            /*if (Staticstuff.board.white_turn)
+            {
+                TreeNode minMaxTree = new TreeNode(Staticstuff.board);
+                minMaxTree.BuildMovesTree();
+                int a = AI.minimax(minMaxTree, 3, int.MinValue, int.MaxValue, true);
+                List<TreeNode> child = new List<TreeNode>();
+                child = minMaxTree.childs;
+                foreach (TreeNode t in child)
+                {
+                    if (AI.evaluateBoard(t.board) == a)
+                    {
+                        Staticstuff.board = t.board;
+                        break;
+                    }
+                }
+                Staticstuff.board.white_turn = !Staticstuff.board.white_turn;
+            }*/
         }
 
         /// <summary>
@@ -171,24 +186,24 @@ namespace Chess
                 Staticstuff.sb.Draw(tex, new Vector2(location.x * 50 + 10, location.y * 50 + 5), Color.White);
                 if (draw_spots)
                 {
-                    List<Spot> drawing = movingLocations();
+                    List<Spot> drawing = movingLocations(Staticstuff.board);
                     foreach (Spot s in drawing)
                     {
                         Staticstuff.sb.Draw(Staticstuff.cm.Load<Texture2D>("blue"), new Vector2(s.x * 50, s.y * 50), Color.White);
-                        Staticstuff.locations[s.x, s.y].draw();
+                        Staticstuff.board.locations[s.x, s.y].draw();
                     }
-                    drawing = eatingLocations();
+                    drawing = eatingLocations(Staticstuff.board);
                     foreach (Spot s in drawing)
                     {
                         Staticstuff.sb.Draw(Staticstuff.cm.Load<Texture2D>("blue"), new Vector2(s.x * 50, s.y * 50), Color.White);
-                        Staticstuff.locations[s.x, s.y].draw();
+                        Staticstuff.board.locations[s.x, s.y].draw();
                     }
                 }
             }
         }
 
-        public abstract List<Spot> eatingLocations();// return a list of the possible places to eat
-        public abstract List<Spot> movingLocations();// return a list of the possible places to move
+        public abstract List<Spot> eatingLocations(Board board);// return a list of the possible places to eat
+        public abstract List<Spot> movingLocations(Board board);// return a list of the possible places to move
 
     }
 }

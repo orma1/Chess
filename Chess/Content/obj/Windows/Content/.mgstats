@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Or/source/repos/Chess/Chess/Content/Arial.spritefont","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Arial.xnb","FontDescriptionProcessor","SpriteFontContent",2005,37905,0.2483616
 "C:/Users/Or/source/repos/Chess/Chess/Content/Black_Win.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/Black_Win.xnb","TextureProcessor","Texture2DContent",2389,60085,0.3182585
 "C:/Users/Or/source/repos/Chess/Chess/Content/blue.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/blue.xnb","TextureProcessor","Texture2DContent",184,10085,0.2847606
 "C:/Users/Or/source/repos/Chess/Chess/Content/board.png","C:/Users/Or/source/repos/Chess/Chess/Content/bin/Windows/Content/board.xnb","TextureProcessor","Texture2DContent",20967,640085,0.3829754

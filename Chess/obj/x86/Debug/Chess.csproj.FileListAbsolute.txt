@@ -36,3 +36,5 @@ C:\Users\Or\source\repos\Chess\Chess\bin\Windows\x86\Debug\Content\Pieces\Black\
 C:\Users\Or\source\repos\Chess\Chess\bin\Windows\x86\Debug\Content\blue.xnb
 C:\Users\Or\source\repos\Chess\Chess\bin\Windows\x86\Debug\Content\Black_Win.xnb
 C:\Users\Or\source\repos\Chess\Chess\bin\Windows\x86\Debug\Content\White_Win.xnb
+C:\Users\Or\source\repos\Chess\Chess\obj\x86\Debug\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Or\source\repos\Chess\Chess\bin\Windows\x86\Debug\Content\Arial.xnb

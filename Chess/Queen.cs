@@ -18,9 +18,10 @@ namespace Chess
         public Queen(Spot location, PieceColor pc, Texture2D tex)
     : base(location, pc, tex)
         {
+            value = 9;
             pt = PieceType.Queen;
         }
-        public override List<Spot> eatingLocations()
+        public override List<Spot> eatingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             int currx = location.x;
@@ -30,10 +31,10 @@ namespace Chess
                 currx++;
                 curry++;
                 if (currx >= 8 || curry >= 8) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
+                if (board.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
-                    if (Staticstuff.locations[currx, curry].pc != pc)
+                    if (board.locations[currx, curry].pc != pc)
                     {
                         list.Add(new Spot(currx, curry));
                         break;
@@ -48,10 +49,10 @@ namespace Chess
                 currx--;
                 curry++;
                 if (currx < 0 || curry >= 8) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
+                if (board.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
-                    if (Staticstuff.locations[currx, curry].pc != pc)
+                    if (board.locations[currx, curry].pc != pc)
                     {
                         list.Add(new Spot(currx, curry));
                         break;
@@ -66,10 +67,10 @@ namespace Chess
                 currx++;
                 curry--;
                 if (currx >= 8 || curry < 0) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
+                if (board.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
-                    if (Staticstuff.locations[currx, curry].pc != pc)
+                    if (board.locations[currx, curry].pc != pc)
                     {
                         list.Add(new Spot(currx, curry));
                         break;
@@ -84,10 +85,10 @@ namespace Chess
                 currx--;
                 curry--;
                 if (currx < 0 || curry < 0) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None) continue;
+                if (board.locations[currx, curry].pt == PieceType.None) continue;
                 else
                 {
-                    if (Staticstuff.locations[currx, curry].pc != pc)
+                    if (board.locations[currx, curry].pc != pc)
                     {
                         list.Add(new Spot(currx, curry));
                         break;
@@ -100,8 +101,8 @@ namespace Chess
             while (currx < 7)
             {
                 currx++;
-                if (Staticstuff.locations[currx, curry].pc == pc) break;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None)
+                if (board.locations[currx, curry].pc == pc) break;
+                if (board.locations[currx, curry].pt != PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     break;
@@ -112,8 +113,8 @@ namespace Chess
             while (currx > 0)
             {
                 currx--;
-                if (Staticstuff.locations[currx, curry].pc == pc) break;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None)
+                if (board.locations[currx, curry].pc == pc) break;
+                if (board.locations[currx, curry].pt != PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     break;
@@ -123,8 +124,8 @@ namespace Chess
             while (curry < 7)
             {
                 curry++;
-                if (Staticstuff.locations[currx, curry].pc == pc) break;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None)
+                if (board.locations[currx, curry].pc == pc) break;
+                if (board.locations[currx, curry].pt != PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     break;
@@ -134,8 +135,8 @@ namespace Chess
             while (curry > 0)
             {
                 curry--;
-                if (Staticstuff.locations[currx, curry].pc == pc) break;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None)
+                if (board.locations[currx, curry].pc == pc) break;
+                if (board.locations[currx, curry].pt != PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     break;
@@ -143,7 +144,7 @@ namespace Chess
             }
             return list;
         }
-        public override List<Spot> movingLocations()
+        public override List<Spot> movingLocations(Board board)
         {
             List<Spot> list = new List<Spot>();
             int currx = location.x;
@@ -153,7 +154,7 @@ namespace Chess
                 currx++;
                 curry++;
                 if (currx > 7 || curry > 7) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None)
+                if (board.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     continue;
@@ -167,7 +168,7 @@ namespace Chess
                 currx--;
                 curry++;
                 if (currx < 0 || curry > 7) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None)
+                if (board.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     continue;
@@ -181,7 +182,7 @@ namespace Chess
                 currx++;
                 curry--;
                 if (currx > 7 || curry < 0) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None)
+                if (board.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     continue;
@@ -195,7 +196,7 @@ namespace Chess
                 currx--;
                 curry--;
                 if (currx < 0 || curry < 0) break;
-                if (Staticstuff.locations[currx, curry].pt == PieceType.None)
+                if (board.locations[currx, curry].pt == PieceType.None)
                 {
                     list.Add(new Spot(currx, curry));
                     continue;
@@ -207,28 +208,28 @@ namespace Chess
             while (currx < 7)
             {
                 currx++;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None) break;
+                if (board.locations[currx, curry].pt != PieceType.None) break;
                 list.Add(new Spot(currx, curry));
             }
             currx = location.x;
             while (currx > 0)
             {
                 currx--;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None) break;
+                if (board.locations[currx, curry].pt != PieceType.None) break;
                 list.Add(new Spot(currx, curry));
             }
             currx = location.x;
             while (curry < 7)
             {
                 curry++;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None) break;
+                if (board.locations[currx, curry].pt != PieceType.None) break;
                 list.Add(new Spot(currx, curry));
             }
             curry = location.y;
             while (curry > 0)
             {
                 curry--;
-                if (Staticstuff.locations[currx, curry].pt != PieceType.None) break;
+                if (board.locations[currx, curry].pt != PieceType.None) break;
                 list.Add(new Spot(currx, curry));
             }
             return list;
