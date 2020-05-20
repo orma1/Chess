@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
 
 namespace Chess
 {
@@ -20,6 +21,7 @@ namespace Chess
         MouseState oldms;
         public PieceColor pc;
         public int value;
+        private int count;
         /// <summary>
         /// The constructor for a chess piece, also make any red pixel into transparent
         /// </summary>
@@ -28,7 +30,7 @@ namespace Chess
         /// <param name="tex">The texture of the piece</param>
         public Piece(Spot location, PieceColor pc = PieceColor.None, Texture2D tex = null)
         {
-            value = 0;
+            count = 0;
             draw_spots = false;
             isAlive = true;
             if (tex != null)
@@ -93,6 +95,7 @@ namespace Chess
                     board.locations[this.location.x, this.location.y] = new Empty(new Spot(this.location.x, this.location.y));// create an empty piece in the previous location
                     this.location = location;
                     board.white_turn = !board.white_turn;
+                    break;
                 }
             }
         }
@@ -129,9 +132,10 @@ namespace Chess
             MouseState ms = Mouse.GetState();
             if (ms.LeftButton == ButtonState.Released && oldms.LeftButton == ButtonState.Pressed)
             {
+                count = 0;
                 if ((float)ms.X / 50 > location.x && (float)ms.X / 50 < location.x + 1 && (float)ms.Y / 50 > location.y && (float)ms.Y / 50 < location.y + 1)
                 {
-                    if (Staticstuff.board.white_turn && pc == PieceColor.White || !Staticstuff.board.white_turn && pc == PieceColor.Black)
+                    if (/*Staticstuff.board.white_turn && pc == PieceColor.White ||*/ !Staticstuff.board.white_turn && pc == PieceColor.Black)
                     {
                         if (!draw_spots)
                         {
@@ -157,9 +161,10 @@ namespace Chess
                 }
             }
             oldms = ms;
-            /*if (Staticstuff.board.white_turn)
+            if (Staticstuff.board.white_turn && pc == PieceColor.White)
             {
-                TreeNode minMaxTree = new TreeNode(Staticstuff.board);
+                count++;
+                /*TreeNode minMaxTree = new TreeNode(Staticstuff.board);
                 minMaxTree.BuildMovesTree();
                 int a = AI.minimax(minMaxTree, 3, int.MinValue, int.MaxValue, true);
                 List<TreeNode> child = new List<TreeNode>();
@@ -172,8 +177,88 @@ namespace Chess
                         break;
                     }
                 }
-                Staticstuff.board.white_turn = !Staticstuff.board.white_turn;
-            }*/
+                Staticstuff.board.white_turn = !Staticstuff.board.white_turn;*/
+                if(count == 50)
+                {
+                    count = 0;
+                    string moe = "none";
+                    int max = int.MinValue;
+                    Spot movetodo = new Spot(0, 0);
+                    List<Spot> moves = new List<Spot>();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+
+                            if (Staticstuff.board.locations[i, k].pc == PieceColor.White)
+                            {
+                                
+                                moves = Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board);
+                                foreach(Spot m in moves)
+                                {
+                                    Board curr = new Board(Staticstuff.board);
+                                    //move(m, curr);
+                                    if(AI.evaluateBoard(curr) > max)
+                                    {
+                                        moe = "move";
+                                        max = AI.evaluateBoard(curr);
+                                        movetodo = new Spot(m.x, m.y);
+                                    }
+                                }
+                                moves = Staticstuff.board.locations[i, k].eatingLocations(Staticstuff.board);
+                                
+                                foreach (Spot m in moves)
+                                {
+                                    Board curr = new Board(Staticstuff.board);
+                                    //eat(m, curr);
+                                    if (AI.evaluateBoard(curr) > max)
+                                    {
+                                        moe = "eat";
+                                        max = AI.evaluateBoard(curr);
+                                        movetodo = new Spot(m.x, m.y);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    /*for (int i = 0; i < 8; i++)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+
+                            if (Staticstuff.board.locations[i, k].pc == PieceColor.White)
+                            {
+
+                                moves = Staticstuff.board.locations[i, k].eatingLocations(Staticstuff.board);
+                                if(moves.Count != 0)
+                                {
+                                    foreach(Spot s in moves)
+                                    {
+                                        if(Staticstuff.board.locations[s.x, s.y].value > max)
+                                        {
+                                            movetodo = s;
+                                            max = value;
+                                            moe = "eat";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    moves = Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board);
+                                    movetodo = moves.ToArray()[0];
+                                    max = 0;
+                                    moe = "move";
+                                }
+                              
+                            }
+                        }
+                    }*/
+                    if (moe == "eat") eat(movetodo, Staticstuff.board);
+                    if(moe == "move") move(movetodo, Staticstuff.board);
+                }
+               
+               
+            }
         }
 
         /// <summary>

@@ -18,7 +18,6 @@ namespace Chess
         public static ContentManager cm;
         public static SpriteBatch sb;
         public static Board board;
-        public static PieceColor player;
         public static PieceColor Player_Won;
         public static bool tie;
         /// <summary>

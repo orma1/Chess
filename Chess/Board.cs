@@ -51,12 +51,50 @@ namespace Chess
         }
         public Board(Board board)
         {
+            Piece curr;
             locations = new Piece[8, 8];
+            white_turn = board.white_turn;
             for (int i = 0; i < 8; i++)
             {
                 for (int k = 0; k < 8; k++)
                 {
-                    locations[i, k] = board.locations[i, k];
+                    if(board.locations[i, k].pt == PieceType.Bishop)
+                    {
+                        curr = new Bishop(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else if (board.locations[i, k].pt == PieceType.King)
+                    {
+                        curr = new King(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else if (board.locations[i, k].pt == PieceType.Knight)
+                    {
+                        curr = new Knight(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else if (board.locations[i, k].pt == PieceType.Pawn)
+                    {
+                        curr = new Pawn(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else if (board.locations[i, k].pt == PieceType.Queen)
+                    {
+                        curr = new Queen(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else if (board.locations[i, k].pt == PieceType.Rook)
+                    {
+                        curr = new Rook(new Spot(i, k), board.locations[i, k].pc, null);
+                        locations[i, k] = curr;
+                    }
+                    else
+                    {
+                        curr = new Empty(new Spot(i, k));
+                        locations[i, k] = curr;
+                    }
+                    Game1.EVENT_DRAW -= curr.draw;
+                    Game1.EVENT_UPDATE -= curr.update;
                 }
             }
         }
