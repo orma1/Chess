@@ -30,14 +30,14 @@ namespace Chess
             {
                 if (pc == PieceColor.White)
                 {
-                    if (location.x > 0 && location.y > 0 && location.x < 7)
+                    if (location.y > 0 && location.x < 7)
                     {
                         if ((board.locations[location.x + 1, location.y + 1].pt != PieceType.None) &&
                         ((board.locations[location.x + 1, location.y + 1]).pc == PieceColor.Black))
                         {
                             list.Add(new Spot(location.x + 1, location.y + 1));
                         }
-                        if (location.x > 0 && location.y < 7 && location.x < 7)
+                        if (location.x > 0 && location.y < 7)
                         {
                             if ((board.locations[location.x - 1, location.y + 1]).pt != PieceType.None
                            && ((board.locations[location.x - 1, location.y + 1]).pc == PieceColor.Black))
