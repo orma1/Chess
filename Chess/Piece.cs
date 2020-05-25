@@ -135,7 +135,7 @@ namespace Chess
                 count = 0;
                 if ((float)ms.X / 50 > location.x && (float)ms.X / 50 < location.x + 1 && (float)ms.Y / 50 > location.y && (float)ms.Y / 50 < location.y + 1)
                 {
-                    if (/*Staticstuff.board.white_turn && pc == PieceColor.White ||*/ !Staticstuff.board.white_turn && pc == PieceColor.Black)
+                    if (Staticstuff.board.white_turn && pc == PieceColor.White || !Staticstuff.board.white_turn && pc == PieceColor.Black)
                     {
                         if (!draw_spots)
                         {
@@ -161,7 +161,7 @@ namespace Chess
                 }
             }
             oldms = ms;
-            if (Staticstuff.board.white_turn && pc == PieceColor.White)
+            /*if (Staticstuff.board.white_turn && pc == PieceColor.White)
             {
                 count++;
                 /*TreeNode minMaxTree = new TreeNode(Staticstuff.board);
@@ -177,7 +177,7 @@ namespace Chess
                         break;
                     }
                 }
-                Staticstuff.board.white_turn = !Staticstuff.board.white_turn;*/
+                Staticstuff.board.white_turn = !Staticstuff.board.white_turn;
                 if(count == 50)
                 {
                     count = 0;
@@ -244,21 +244,30 @@ namespace Chess
                                 }
                                 else
                                 {
-                                    moves = Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board);
-                                    movetodo = moves.ToArray()[0];
-                                    max = 0;
-                                    moe = "move";
+                                moves = Staticstuff.board.locations[i, k].movingLocations(Staticstuff.board);
+                                if(moves.Count != 0)
+                                {
+                                    foreach(Spot s in moves)
+                                        {
+                                            if (AI.evaluateBoard(Staticstuff.board) > max)
+                                            {
+                                                moe = "move";
+                                                max = AI.evaluateBoard(Staticstuff.board);
+                                                movetodo = s;
+                                            }
+                                        }
+                                }
                                 }
                               
                             }
                         }
-                    }*/
+                    }
                     if (moe == "eat") eat(movetodo, Staticstuff.board);
                     if(moe == "move") move(movetodo, Staticstuff.board);
                 }
                
                
-            }
+            }*/
         }
 
         /// <summary>
